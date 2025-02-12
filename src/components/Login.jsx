@@ -69,11 +69,13 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (isValid) {
+      history.push("/success");
     }
   };
 
   return (
     <Form onSubmit={handleSubmit}>
+      <h1 cy-data-header="sign In">Sign In</h1>
       <FormGroup>
         <Label for="exampleEmail">Email</Label>
         <Input
@@ -84,8 +86,13 @@ export default function Login() {
           onChange={handleChange}
           value={form.email}
           invalid={errors.email}
+          cy-data-email="email"
         />
-        {errors.email ? <FormFeedback>{errors.email}</FormFeedback> : null}
+        {errors.email ? (
+          <FormFeedback cy-data-email-error="email-error">
+            {errors.email}
+          </FormFeedback>
+        ) : null}
       </FormGroup>
       <FormGroup>
         <Label for="examplePassword">Password</Label>
@@ -97,9 +104,12 @@ export default function Login() {
           onChange={handleChange}
           value={form.password}
           invalid={errors.password}
+          cy-data-password="password"
         />
         {errors.password ? (
-          <FormFeedback>{errors.password}</FormFeedback>
+          <FormFeedback cy-data-password-error="password-error">
+            {errors.password}
+          </FormFeedback>
         ) : null}
       </FormGroup>
       <FormGroup check>
@@ -110,13 +120,14 @@ export default function Login() {
           type="checkbox"
           onChange={handleChange}
           invalid={errors.terms}
+          cy-data-terms="terms"
         />{" "}
         <Label htmlFor="terms" check>
           I agree to terms of service and privacy policy
         </Label>
       </FormGroup>
       <FormGroup className="text-center p-4">
-        <Button color="primary" disabled={!isValid}>
+        <Button color="primary" disabled={!isValid} cy-data-button="sign-in">
           Sign In
         </Button>
       </FormGroup>
